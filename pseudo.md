@@ -1,7 +1,8 @@
 # Tic-Tac-Toe PseudoCode
-playerTurn: determines whose turn it is
-    type: string
-    value: X or O
+playerTurn: used to track player turn
+
+playerXArr: array used to track player X moves 
+playerOArr: array used to track player O moves
 
 winCriteria: array value used to assess if a player has won
     type: array
@@ -58,6 +59,7 @@ currentState: used to define the state of the game, different than gameActive
     boardState set to empty string length 8
 *ENDFUNCTION* 
 
+CLEARED
 *FUNCTION* - changePlayer(): used to alternate player turn following tile selection
     IF playerTurn equals X
         THEN playerTurn equals O;
@@ -93,11 +95,13 @@ drawBoard()
 Rough Draft
 ---
 # START 
+CLEARED
 *FUNCTION* - init()
     create header(tic-tac-toe), blank board (boardState array blank), reset button and potentially whose turn it is (X or O).  gameActive is true, playerTurn is set to X
 *ENDFUNCTION* 
 
 IF player clicks gameReset button
+NOT CLEARED
 *FUNCTION* - gameReset()
     THIS is a function of INIT, reseting state to initial configuration
     THEN boardState is cleared to blank array, game active is TRUE 
@@ -143,3 +147,9 @@ player X is the active player or playerTurn equals X
 
 
 # END PROGRAM
+
+things to add: 
+winning message
+button for reset
+classList vs className
+look up data-number (data attributes), for example <button>
