@@ -22,14 +22,14 @@ let gameState = {
     playerXArr: [],
     playerOArr: [],
     winCriteria: [
-        [0, 1, 2],
-        [3, 4, 5],
-        [6, 7, 8],
-        [0, 3, 6],
-        [1, 4, 7],
-        [2, 5, 8],
-        [0, 4, 8],
-        [2, 4, 8]                        
+        ['0', '1', '2'],
+        ['3', '4', '5'],
+        ['6', '7', '8'],
+        ['0', '3', '6'],
+        ['1', '4', '7'],
+        ['2', '5', '8'],
+        ['0', '4', '8'],
+        ['2', '4', '6']                        
     ],
     boardState: ['','','','','','','',''],
     gameActive: true,
@@ -74,8 +74,19 @@ function handleClick(e) { //dont have a specific e but this e is getting passed 
     changePlayer();
 }
 
-function checkWinCond() {
 
+function checkWinCond() {
+    for (let i = 0; i < gameState.winCriteria.length; i++) {
+        if(gameState.playerXArr.includes(gameState.winCriteria[i][0]) && gameState.playerXArr.includes(gameState.winCriteria[i][1]) && gameState.playerXArr.includes(gameState.winCriteria[i][2])) {
+            console.log('X Wins');
+        } else if (gameState.playerOArr.includes(gameState.winCriteria[i][0]) && gameState.playerOArr.includes(gameState.winCriteria[i][1]) && gameState.playerOArr.includes(gameState.winCriteria[i][2])) {
+            console.log('O Wins');
+        } else {
+            if (gameState.playerOArr.length + gameState.playerXArr.length === 9) {
+                console.log('Draw');
+            }
+        }
+    }
 }
 
 //Creating page elements
@@ -92,7 +103,6 @@ function generateElement (el, parent, id, klass) {
 
 //select tile, clicking should add x or o
 function updateTile(tile) {
-    console.log('this is the ID for tile clicked' + tile.id)
     tile.textContent = (gameState.playerTurn);
     //gameState.boardState[tile.id] = gameState.playerTurn;
     if (gameState.playerTurn === "X") {
