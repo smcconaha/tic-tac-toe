@@ -1,3 +1,11 @@
+//Creating page elements
+const master = document.getElementById('master');
+startBtn = document.createElement('button');    
+startBtn.textContent = 'Start Game';
+startBtn.id = 'startButton';
+master.appendChild(startBtn);
+startBtn.addEventListener('click', init);
+
 //given a array with Xs and Os, return the index numbers where those values occur
 /*const testArray = ['X', 'X', 'O', 'X', 'O', 'O', 'X', 'O'];
 
@@ -31,16 +39,22 @@ let gameState = {
         ['0', '4', '8'],
         ['2', '4', '6']                        
     ],
-    boardState: ['','','','','','','',''],
     gameActive: true,
     currentState: 0,
 }
 
-resetBtn = document.getElementById('resetButton');
-resetBtn.addEventListener('click', init);
+function resetBtn () {
+    resetBtn = document.createElement('button');
+    resetBtn.textContent = 'Reset Game';
+    resetBtn.id = "resetBtn";
+    master.appendChild(resetBtn);
+    resetBtn.addEventListener('click', init);
+};
+
 
 //init function sets up page, called in eventListener above
 function init() {
+    resetBtn();
     gameState.playerTurn = "X";
     generateElement('div', 'master', 'row1', 'row border-bottom');
     generateElement('div', 'row1', '0', 'col-4 border-end bg-info bg-opacity-25');
@@ -95,9 +109,6 @@ function checkWinCond() {
     }
 }
 
-//Creating page elements
-const master = document.getElementById('master');
-// master.className = 'container text-center';
 
 //create row and col function
 function generateElement (el, parent, id, klass) {
