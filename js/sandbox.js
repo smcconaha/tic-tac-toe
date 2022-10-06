@@ -66,24 +66,30 @@ function init() {
 function handleClick(e) { //dont have a specific e but this e is getting passed in based on add event listener....ties with event listener above
     const tile = e.target; //whichever cell we clicked on 
     //pass tile and playerTurn
-    //pushes tile ID into the respective X or O array
     updateTile(tile);
+    //check for win or draw condition
     checkWinCond();
-    // check for draw
     //switch turns
     changePlayer();
+}
+
+function gameResult (text) {
+    let outcome = document.createElement('h1');
+    outcome.textContent = text;
+    master.appendChild(outcome);
 }
 
 
 function checkWinCond() {
     for (let i = 0; i < gameState.winCriteria.length; i++) {
         if(gameState.playerXArr.includes(gameState.winCriteria[i][0]) && gameState.playerXArr.includes(gameState.winCriteria[i][1]) && gameState.playerXArr.includes(gameState.winCriteria[i][2])) {
-            console.log('X Wins');
+            gameResult("X's just smoked you!");
         } else if (gameState.playerOArr.includes(gameState.winCriteria[i][0]) && gameState.playerOArr.includes(gameState.winCriteria[i][1]) && gameState.playerOArr.includes(gameState.winCriteria[i][2])) {
-            console.log('O Wins');
+                gameResult("O's just ate your lunch!");
         } else {
             if (gameState.playerOArr.length + gameState.playerXArr.length === 9) {
-                console.log('Draw');
+                gameResult("Tie...you either both suck or are both REALLY good.");
+                return;
             }
         }
     }
