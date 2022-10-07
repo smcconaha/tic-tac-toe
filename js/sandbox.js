@@ -1,9 +1,9 @@
 //Creating page elements
 const master = document.getElementById('master');
 startBtn = document.createElement('button');    
-startBtn.textContent = 'Start Game';
+startBtn.textContent = 'Start Game / Reset';
 startBtn.id = 'startButton';
-master.appendChild(startBtn);
+document.body.appendChild(startBtn);
 startBtn.addEventListener('click', init);
 
 //given a array with Xs and Os, return the index numbers where those values occur
@@ -43,31 +43,38 @@ let gameState = {
     currentState: 0,
 }
 
-function resetBtn () {
-    resetBtn = document.createElement('button');
-    resetBtn.textContent = 'Reset Game';
-    resetBtn.id = "resetBtn";
-    master.appendChild(resetBtn);
-    resetBtn.addEventListener('click', init);
-};
+// function resetBtn() {
+//     resetBtn = document.createElement('button');
+//     resetBtn.textContent = 'Reset Game';
+//     resetBtn.id = "resetBtn";
+//     master.appendChild(resetBtn);
+//     resetBtn.addEventListener('click', init);
+// };
 
+function clearContent() {
+    gameState.playerXArr = [];
+    gameState.playerOArr = [];
+    while (master.firstChild) {
+        master.firstChild.remove()
+    };
+};
 
 //init function sets up page, called in eventListener above
 function init() {
-    resetBtn();
+    clearContent();
     gameState.playerTurn = "X";
-    generateElement('div', 'master', 'row1', 'row border-bottom');
-    generateElement('div', 'row1', '0', 'col-4 border-end bg-info bg-opacity-25');
-    generateElement('div', 'row1', '1', 'col-4 border-end');
-    generateElement('div', 'row1', '2', 'col-4 bg-info bg-opacity-25');
-    generateElement('div', 'master', 'row2', 'row border-bottom');
-    generateElement('div', 'row2', '3', 'col-4 border-end');
-    generateElement('div', 'row2', '4', 'col-4 border-end bg-info bg-opacity-25');
-    generateElement('div', 'row2', '5', 'col-4');
-    generateElement('div', 'master', 'row3', 'row');
-    generateElement('div', 'row3', '6', 'col-4 border-end bg-info bg-opacity-25');
-    generateElement('div', 'row3', '7', 'col-4 border-end');
-    generateElement('div', 'row3', '8', 'col-4 bg-info bg-opacity-25');
+    generateElement('div', 'master', 'row1', 'row border border-dark fs-6');
+    generateElement('div', 'row1', '0', 'col-4 border border-dark bg-info bg-opacity-25 fs-6');
+    generateElement('div', 'row1', '1', 'col-4 border border-dark bg-info bg-opacity-50');
+    generateElement('div', 'row1', '2', 'col-4 border border-dark bg-info bg-opacity-25');
+    generateElement('div', 'master', 'row2', 'row border border-dark');
+    generateElement('div', 'row2', '3', 'col-4 border border-dark bg-info bg-opacity-50');
+    generateElement('div', 'row2', '4', 'col-4 border border-dark bg-info bg-opacity-25');
+    generateElement('div', 'row2', '5', 'col-4 border border-dark bg-info bg-opacity-50');
+    generateElement('div', 'master', 'row3', 'row border border-dark');
+    generateElement('div', 'row3', '6', 'col-4 border border-dark bg-info bg-opacity-25');
+    generateElement('div', 'row3', '7', 'col-4 border border-dark bg-info bg-opacity-50');
+    generateElement('div', 'row3', '8', 'col-4 border border-dark bg-info bg-opacity-25');
 //eventListener for tiles
     const allTiles = document.querySelectorAll('div.col-4');
     allTiles.forEach(tile => {
