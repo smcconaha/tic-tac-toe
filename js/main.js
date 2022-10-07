@@ -1,6 +1,9 @@
 //CREATING PAGE ELEMENTS//
 
 const master = document.getElementById('master');
+headText = document.createElement('h1');
+headText.textContent = 'Tic-Tac-Toe';
+master.appendChild(headText);
 startBtn = document.createElement('button');    
 startBtn.textContent = 'Start Game / Reset';
 startBtn.id = 'startButton';
