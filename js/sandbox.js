@@ -63,15 +63,15 @@ function clearContent() {
 function init() {
     clearContent();
     gameState.playerTurn = "X";
-    generateElement('div', 'master', 'row1', 'row border border-dark fs-6');
+    generateElement('div', 'master', 'row1', 'row border border-dark fs-1');
     generateElement('div', 'row1', '0', 'col-4 border border-dark bg-info bg-opacity-25 fs-6');
     generateElement('div', 'row1', '1', 'col-4 border border-dark bg-info bg-opacity-50');
     generateElement('div', 'row1', '2', 'col-4 border border-dark bg-info bg-opacity-25');
-    generateElement('div', 'master', 'row2', 'row border border-dark');
+    generateElement('div', 'master', 'row2', 'row border border-dark fs-1');
     generateElement('div', 'row2', '3', 'col-4 border border-dark bg-info bg-opacity-50');
     generateElement('div', 'row2', '4', 'col-4 border border-dark bg-info bg-opacity-25');
     generateElement('div', 'row2', '5', 'col-4 border border-dark bg-info bg-opacity-50');
-    generateElement('div', 'master', 'row3', 'row border border-dark');
+    generateElement('div', 'master', 'row3', 'row border border-dark fs-1');
     generateElement('div', 'row3', '6', 'col-4 border border-dark bg-info bg-opacity-25');
     generateElement('div', 'row3', '7', 'col-4 border border-dark bg-info bg-opacity-50');
     generateElement('div', 'row3', '8', 'col-4 border border-dark bg-info bg-opacity-25');
@@ -81,7 +81,6 @@ function init() {
         tile.addEventListener('click', handleClick, { once: true }) //only fire event listener once, maybe use getElementsByClassName
     })
 }
-
 
 
 function handleClick(e) { //dont have a specific e but this e is getting passed in based on add event listener....ties with event listener above
@@ -100,16 +99,25 @@ function gameResult (text) {
     master.appendChild(outcome);
 }
 
+function removeTileFun() {
+    const allTiles = document.querySelectorAll('div.col-4');
+        allTiles.forEach(tile => {
+            tile.removeEventListener('click', handleClick, { once: true })
+    });
+};
 
 function checkWinCond() {
     for (let i = 0; i < gameState.winCriteria.length; i++) {
         if(gameState.playerXArr.includes(gameState.winCriteria[i][0]) && gameState.playerXArr.includes(gameState.winCriteria[i][1]) && gameState.playerXArr.includes(gameState.winCriteria[i][2])) {
             gameResult("X's just smoked you!");
+            removeTileFun();
         } else if (gameState.playerOArr.includes(gameState.winCriteria[i][0]) && gameState.playerOArr.includes(gameState.winCriteria[i][1]) && gameState.playerOArr.includes(gameState.winCriteria[i][2])) {
                 gameResult("O's just ate your lunch!");
+                removeTileFun();
         } else {
             if (gameState.playerOArr.length + gameState.playerXArr.length === 9) {
                 gameResult("Tie...you either both suck or are both REALLY good.");
+                removeTileFun();
                 return;
             }
         }
@@ -140,4 +148,3 @@ function updateTile(tile) {
 function changePlayer() {
     gameState.playerTurn === "X" ? gameState.playerTurn = "O" : gameState.playerTurn = "X";
 }
-
